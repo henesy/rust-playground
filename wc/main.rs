@@ -14,7 +14,7 @@ fn usage() {
 fn main() {
 	static START: Once = Once::new();
 	let mut r = true;		// Count runes
-	let mut b = true;		// Count bytes
+	let mut c = true;		// Count bytes
 	let mut l = true;		// Count lines
 	let mut w = true;		// Count words
 
@@ -35,7 +35,7 @@ fn main() {
 				START.call_once(|| {
 					// Runs only once
 					r = false;
-					b = false;
+					c = false;
 					l = false;
 					w = false;
 				});
@@ -49,7 +49,7 @@ fn main() {
 				for rune in runes {
 					match rune {	
 						'r' => r = true,
-						'b' => b = true,
+						'b' => c = true,
 						'l' => l = true,
 						'w' => w = true,
 
@@ -73,6 +73,8 @@ fn main() {
 	/* Count from input(s) */
 
 	let stdin = io::stdin();
+
+	// Use this lock as a BufRead
 	let mut br = stdin.lock();
 	loop {
 		let mut buf = vec![];
@@ -108,7 +110,7 @@ fn main() {
 	if r {
 		println!("runes: {}", runes);
 	}
-	if b {
+	if c {
 		println!("bytes: {}", bytes);
 	}
 }
